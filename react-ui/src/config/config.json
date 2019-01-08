@@ -1,0 +1,24 @@
+{
+    "local": {
+      "projectInfo": {
+        "appName": "appointment",
+        "env": "local"
+      },
+      "url": "http://localhost:5001"
+    },
+    "dev": {
+      "projectInfo": {
+          "appName": "appointment",
+          "env": "dev"
+        },
+      "url": ""
+    },
+    "pr": {
+      "projectInfo": {
+          "appName": "appointment",
+          "env": "pr"
+        },
+      "url": ""
+    }
+  }
+  
