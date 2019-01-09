@@ -53,7 +53,7 @@ class Appointment extends Component {
 
   renderLogin = () => {
     // console.log('this.props.userName.userName:', this.props.userInfoReducer.userName);
-    const userName = this.props.userInfoReducer === undefined ? "" : this.props.userInfoReducer.userName;
+    const userName = this.props.userInfo === undefined ? "" : this.props.userInfo.userName;
     // const userName = this.props.userName.userName === "" ? "" : this.props.userName.userName;
     console.log('render:', userName);
     const loginDiv = {
