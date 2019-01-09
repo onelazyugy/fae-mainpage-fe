@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import AppointmentSlot from "../components/AppointmentSlot";
-import { retrieveAppointments, updateModalData } from "../actions/appointmentActions";
+import { userNameChange, passwordChange } from "../actions/appointmentActions";
 import _ from "lodash";
 
 import TextField from 'material-ui/TextField';
@@ -9,7 +9,7 @@ import Button from 'muicss/lib/react/button';
 
 class Appointment extends Component {
   componentDidMount = () => {
-    this.props.onRetrieveAppointments();
+    // this.props.onRetrieveAppointments();
   };
 
   onAppointmentSlotClicked = (event) => {
@@ -25,6 +25,23 @@ class Appointment extends Component {
     this.props.onUpdateModalData(modalData);
   }
 
+  userNameChange = (event) => {
+    const userName = event.target.value;
+    const userInfo = {userName: userName, password: ''}
+    console.log('name: ' , userInfo);
+    this.props.onUserNameChange(userInfo);
+  };
+
+  passwordChange = (event) => {
+    const password = event.target.value;
+    this.props.onPasswordChange(password);
+  };
+
+  onLogin = (event) => {
+    console.log('login clicked!');
+    console.log('this.props.userName:', this.props.userName);
+  }
+
   renderTimeSlot = () => {
     let appointmentSlot = "no appointment slot available";
     if (this.props.appointments.slots !== undefined && this.props.appointments.slots.length > 0) {
@@ -35,6 +52,10 @@ class Appointment extends Component {
   };
 
   renderLogin = () => {
+    // console.log('this.props.userName.userName:', this.props.userInfoReducer.userName);
+    const userName = this.props.userInfoReducer === undefined ? "" : this.props.userInfoReducer.userName;
+    // const userName = this.props.userName.userName === "" ? "" : this.props.userName.userName;
+    console.log('render:', userName);
     const loginDiv = {
       border: '2px solid',
       padding: 10
@@ -43,23 +64,23 @@ class Appointment extends Component {
       <div>
         <TextField
           style={{width:'100%'}}
-          hintText="User name"
+          // hintText="User name"
           floatingLabelText="User Name"
           floatingLabelFixed={true}
-          onChange={this.onUserNameChange}
-          value={''}
+          onChange={this.userNameChange}
+          value={userName}
         />
         <TextField
           style={{width:'100%'}}
           hintText="Password"
           floatingLabelText="Password"
           floatingLabelFixed={true}
-          onChange={this.onPasswordChange}
+          onChange={this.passwordChange}
           value={''}
         />
       </div>
       <div className="mui--text-right">
-        <Button color="primary">button</Button>
+        <Button color="primary" onClick={this.onLogin}>login</Button>
       </div>
     </div>
   }
@@ -75,15 +96,6 @@ class Appointment extends Component {
     </div>
   }
 
-  onUserNameChange = (event) => {
-    const username = event.target.value;
-    // this.props.onUpdateModalData(clonedModalData);
-  };
-
-  onPasswordChange = (event) => {
-    const password = event.target.value;
-  };
-
   render = () => {
     return (
       <div>
@@ -98,17 +110,24 @@ class Appointment extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onRetrieveAppointments() {
-    dispatch(retrieveAppointments());
+  onUserNameChange(username) {
+    dispatch(userNameChange(username));
   },
-  onUpdateModalData(modalData) {
-    dispatch(updateModalData(modalData));
+  onPasswordChange() {
+    dispatch(passwordChange());
   }
+  // onRetrieveAppointments() {
+  //   dispatch(retrieveAppointments());
+  // },
+  // onUpdateModalData(modalData) {
+  //   dispatch(updateModalData(modalData));
+  // }
 });
 
 function mapStateToProps(state) {
   return {
-    appointments: state.appointmentReducer
+    appointments: state.appointmentReducer,
+    userInfo: state.userInfoReducer
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Appointment);

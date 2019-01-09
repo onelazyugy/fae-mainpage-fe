@@ -2,6 +2,21 @@ import * as types from "./actionTypes";
 import axios from "axios";
 import { CONFIG } from "../config/globals";
 
+export const userNameChange = (userInfo) => dispatch => {
+  console.log('action:', userInfo);
+  dispatch({
+    type: types.USERNAME,
+    payload: userInfo
+  });
+}
+
+export const passwordChange = (password) => dispatch => {
+  dispatch({
+    type: types.PASSWORD,
+    payload: password
+  });
+}
+
 export const retrieveAppointments = () => dispatch => {
   const url = CONFIG.url;
   axios

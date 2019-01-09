@@ -1,4 +1,6 @@
 export default {
     appointments: {},
-    modalState: {}
+    modalState: {},
+    userInfo: {userName: '', password: ''},
+    password: ''
 }

@@ -2,3 +2,6 @@ export const RETRIEVE_APPOINTMENT = 'RETRIEVE_APPOINTMENT';
 export const BOOK_APPOINTMENT = 'BOOK_APPOINTMENT';
 export const MODAL_OPEN = 'MODAL_OPEN';
 export const MODAL_CLOSE = 'MODAL_CLOSE';
+
+export const USERNAME = 'USERNAME';
+export const PASSWORD = 'PASSWORD';

@@ -1,6 +1,15 @@
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
+export const userInfoReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case types.USERNAME:
+            return { ...action.payload };
+        default:
+            return state;
+    }
+}
+
 export const appointmentReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.RETRIEVE_APPOINTMENT:
