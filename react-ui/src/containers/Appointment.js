@@ -39,7 +39,7 @@ class Appointment extends Component {
 
   onLogin = (event) => {
     console.log('login clicked!');
-    console.log('this.props.userName:', this.props.userName);
+    console.log('this.props.userName:', this.props.userInfo);
   }
 
   renderTimeSlot = () => {
