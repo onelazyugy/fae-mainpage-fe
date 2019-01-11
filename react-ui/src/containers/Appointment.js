@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AppointmentSlot from "../components/AppointmentSlot";
 import { userNameChange, passwordChange } from "../actions/appointmentActions";
 import _ from "lodash";
 
@@ -10,21 +9,8 @@ import Button from 'muicss/lib/react/button';
 class Appointment extends Component {
   componentDidMount = () => {
     // this.props.onRetrieveAppointments();
+    console.log('componentDidMount...');
   };
-
-  onAppointmentSlotClicked = (event) => {
-    const selectedAppt = _.find(this.props.appointments.slots, { 'id': parseInt(event.target.id) });
-    const modalData = {
-      isOpen: true,
-      appointmentId: event.target.id,
-      userInfo: {
-        name: selectedAppt.name,
-        phone: selectedAppt.phone
-      }
-    }
-    this.props.onUpdateModalData(modalData);
-  }
-
   userNameChange = (event) => {
     const userName = event.target.value;
     const userInfo = {userName: userName, password: ''}
@@ -42,20 +28,8 @@ class Appointment extends Component {
     console.log('this.props.userName:', this.props.userInfo);
   }
 
-  renderTimeSlot = () => {
-    let appointmentSlot = "no appointment slot available";
-    if (this.props.appointments.slots !== undefined && this.props.appointments.slots.length > 0) {
-      const slots = this.props.appointments.slots;
-      appointmentSlot = <AppointmentSlot slots={slots} onAppointmentSlotClicked={this.onAppointmentSlotClicked} />
-    }
-    return appointmentSlot;
-  };
-
   renderLogin = () => {
-    // console.log('this.props.userName.userName:', this.props.userInfoReducer.userName);
-    const userName = this.props.userInfo === undefined ? "" : this.props.userInfo.userName;
-    // const userName = this.props.userName.userName === "" ? "" : this.props.userName.userName;
-    console.log('render:', userName);
+    const userName = this.props.userInfo.userName === undefined ? "" : this.props.userInfo.userName;
     const loginDiv = {
       border: '2px solid',
       padding: 10
@@ -116,17 +90,10 @@ const mapDispatchToProps = dispatch => ({
   onPasswordChange() {
     dispatch(passwordChange());
   }
-  // onRetrieveAppointments() {
-  //   dispatch(retrieveAppointments());
-  // },
-  // onUpdateModalData(modalData) {
-  //   dispatch(updateModalData(modalData));
-  // }
 });
 
 function mapStateToProps(state) {
   return {
-    appointments: state.appointmentReducer,
     userInfo: state.userInfoReducer
   };
 }
