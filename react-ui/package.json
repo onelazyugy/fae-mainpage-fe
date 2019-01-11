@@ -10,6 +10,7 @@
     "gulp-replace": "^0.6.1",
     "gulp-util": "^3.0.8",
     "lodash": "^4.17.5",
+    "material-ui": "^0.19.4",
     "muicss": "^0.9.38",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
