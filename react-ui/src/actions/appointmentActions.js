@@ -3,17 +3,16 @@ import axios from "axios";
 import { CONFIG } from "../config/globals";
 
 export const userNameChange = (userInfo) => dispatch => {
-  console.log('action:', userInfo);
   dispatch({
     type: types.USERNAME,
     payload: userInfo
   });
 }
 
-export const passwordChange = (password) => dispatch => {
+export const passwordChange = (userInfo) => dispatch => {
   dispatch({
     type: types.PASSWORD,
-    payload: password
+    payload: userInfo
   });
 }
 

@@ -1,60 +1,69 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { userNameChange, passwordChange } from "../actions/appointmentActions";
-import _ from "lodash";
-
-import TextField from 'material-ui/TextField';
-import Button from 'muicss/lib/react/button';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class Appointment extends Component {
   componentDidMount = () => {
     // this.props.onRetrieveAppointments();
     console.log('componentDidMount...');
   };
+
   userNameChange = (event) => {
     const userName = event.target.value;
-    const userInfo = {userName: userName, password: ''}
-    console.log('name: ' , userInfo);
-    this.props.onUserNameChange(userInfo);
+    this.props.userInfo.userName = userName;
+    this.props.onUserNameChange(this.props.userInfo);
   };
 
   passwordChange = (event) => {
     const password = event.target.value;
-    this.props.onPasswordChange(password);
+    this.props.userInfo.password = password;
+    this.props.onPasswordChange(this.props.userInfo);
   };
 
   onLogin = (event) => {
-    console.log('login clicked!');
-    console.log('this.props.userName:', this.props.userInfo);
+    console.log('userInfo:', this.props.userInfo);
   }
 
   renderLogin = () => {
     const userName = this.props.userInfo.userName === undefined ? "" : this.props.userInfo.userName;
+    const password = this.props.userInfo.password === undefined ? "" : this.props.userInfo.password;
     const loginDiv = {
       border: '2px solid',
       padding: 10
     }
+
     return <div style={loginDiv}>
       <div>
         <TextField
-          style={{width:'100%'}}
-          // hintText="User name"
-          floatingLabelText="User Name"
-          floatingLabelFixed={true}
-          onChange={this.userNameChange}
+          type="text"
+          required
+          fullWidth
+          id="name"
+          label="Name"
+          className={""}
           value={userName}
+          onChange={this.userNameChange}
+          margin="normal"
+          variant="outlined"
         />
         <TextField
-          style={{width:'100%'}}
-          hintText="Password"
-          floatingLabelText="Password"
-          floatingLabelFixed={true}
+          type="password"
+          required
+          fullWidth
+          id="password"
+          label="Password"
+          className={""}
+          value={password}
           onChange={this.passwordChange}
-          value={''}
+          margin="normal"
+          variant="outlined"
+          
         />
       </div>
       <div className="mui--text-right">
-        <Button color="primary" onClick={this.onLogin}>login</Button>
+        <Button variant="contained" color="primary" className={""} onClick={this.onLogin}>login</Button>
       </div>
     </div>
   }
@@ -84,11 +93,11 @@ class Appointment extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onUserNameChange(username) {
-    dispatch(userNameChange(username));
+  onUserNameChange(userInfo) {
+    dispatch(userNameChange(userInfo));
   },
-  onPasswordChange() {
-    dispatch(passwordChange());
+  onPasswordChange(userInfo) {
+    dispatch(passwordChange(userInfo));
   }
 });
 
@@ -97,4 +106,5 @@ function mapStateToProps(state) {
     userInfo: state.userInfoReducer
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Appointment);

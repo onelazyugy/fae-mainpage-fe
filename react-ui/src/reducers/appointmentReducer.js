@@ -4,7 +4,9 @@ import initialState from "./initialState";
 export const userInfoReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.USERNAME:
-            return action.payload;
+            return { ...action.payload };
+        case types.PASSWORD:
+            return { ...action.payload };
         default:
             return state;
     }
