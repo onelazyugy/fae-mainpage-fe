@@ -1,7 +1,7 @@
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
-export const userInfoReducer = (state = initialState, action) => {
+export const userInfoReducer = (state = {userName:"", password:""}, action) => {
     switch (action.type) {
         case types.USERNAME:
             return { ...action.payload };

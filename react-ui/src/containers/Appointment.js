@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 class Appointment extends Component {
   componentDidMount = () => {
     // this.props.onRetrieveAppointments();
-    console.log('componentDidMount...');
   };
 
   userNameChange = (event) => {
@@ -22,7 +21,7 @@ class Appointment extends Component {
     this.props.onPasswordChange(this.props.userInfo);
   };
 
-  onLogin = (event) => {
+  onLogin = () => {
     console.log('userInfo:', this.props.userInfo);
   }
 
@@ -63,18 +62,22 @@ class Appointment extends Component {
         />
       </div>
       <div className="mui--text-right">
-        <Button variant="contained" color="primary" className={""} onClick={this.onLogin}>login</Button>
+        <Button size="large" style={{width:"100%"}} variant="contained" color="primary" className={""} onClick={this.onLogin}>login</Button>
+      </div>
+      <div>
+        respone
       </div>
     </div>
   }
 
   renderGameIframe = () => {
-    const iframeDiv = {
+    const iframeOutterDiv = {
       border: '2px solid',
       marginTop: 10,
-      padding: 10
+      padding: 10,
+      height:'100%'
     }
-    return <div style={iframeDiv}>
+    return <div style={iframeOutterDiv}>
       GAME IFRAME
     </div>
   }
